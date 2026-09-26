@@ -88,7 +88,7 @@ st.markdown(
     }
     </style>
     """,
-    unsafe_allow_dict_empty=True,
+    unsafe_allow_html=True,
 )
 
 # File Paths
