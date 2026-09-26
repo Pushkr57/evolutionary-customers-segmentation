@@ -1,33 +1,80 @@
 # evolutionary-customer-segmentation
 Hybrid Genetic Algorithm + PCA + K-Means pipeline for E-Commerce Customer Segmentation and Persona Profiling.
-# Evolutionary AI Customer Segmentation Engine
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](YOUR_STREAMLIT_LIVE_URL_HERE)
+# 🧬 Evolutionary AI Customer Segmentation Engine
 
-An end-to-end Machine Learning project combining RFM analysis, PCA dimensionality reduction, and a DEAP-based Genetic Algorithm (`eaMuPlusLambda`) to optimize K-Means cluster centroids.
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://evolutionary-customer-segmentation.streamlit.app)
+![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## 📌 Problem Statement
-Standard K-Means clustering often gets trapped in local optima due to random centroid initialization. This engine uses an evolutionary search space to maximize Silhouette Score while minimizing Within-Cluster Sum of Squares (WCSS), identifying 4 distinct behavioral segments from e-commerce transaction data.
+An end-to-end Machine Learning pipeline combining RFM+AOV feature engineering, Principal Component Analysis (PCA), and a Genetic Algorithm (`eaMuPlusLambda` via DEAP) to optimize K-Means cluster centroids for e-commerce customer segmentation.
 
-## 📊 Dataset
-- **Source:** [UCI Machine Learning Repository - Online Retail II](https://archive.ics.uci.edu/dataset/502/online+retail+ii)
+🚀 **Live Interactive App:** [https://evolutionary-customer-segmentation.streamlit.app](https://evolutionary-customer-segmentation.streamlit.app)
 
-## 🧬 Methodology
-1. **Feature Engineering:** Recency, Frequency, Monetary (RFM), and Average Order Value (AOV).
-2. **Dimensionality Reduction:** `StandardScaler` + `PCA` retaining 92% explained variance.
-3. **Evolutionary Optimization:** Custom fitness evaluation using `DEAP` (`eaMuPlusLambda`) to evolve centroid coordinates.
-4. **Interactive Dashboard:** Built with Streamlit & Plotly for 3D cluster exploration.
+📌 Problem Statement
+Standard K-Means clustering relies on random centroid initialization (e.g., K-Means++), which can easily trap models in sub-optimal local minima—especially on high-dimensional transaction data.
 
-## 🎯 Target Customer Segments
-- **Cluster 0 — VIP High Spenders:** High monetary value and high order frequency.
-- **Cluster 1 — Active Core Buyers:** Steady purchasing cadence with moderate order values.
-- **Cluster 2 — At-Risk / Dormant:** High recency (long time since last purchase); targeted win-back campaigns needed.
-- **Cluster 3 — Wholesale / Institutional Champions:** High weighted AOV (£479.95) with lower frequency; ideal for dedicated account management.
+This engine replaces standard initialization with an Evolutionary Search Algorithm (eaMuPlusLambda) to evolve cluster centroids across a multi-objective fitness function (maximizing Silhouette Score while minimizing Within-Cluster Sum of Squares / WCSS).
 
-## 🚀 Local Run
-```bash
+🏗️ Architecture & Workflow
+
+┌─────────────────────────┐     ┌─────────────────────────┐     ┌─────────────────────────┐
+│   Online Retail II Data │ ──> │   RFM + AOV Feature     │ ──> │   StandardScaler +      │
+│   (UCI Repository)      │     │   Engineering           │     │   PCA (92% Variance)    │
+└─────────────────────────┘     └─────────────────────────┘     └─────────────────────────┘
+                                                                             │
+┌─────────────────────────┐     ┌─────────────────────────┐                  ▼
+│ Streamlit 3D Dashboard  │ <── │ 4 Behavioral Clusters   │ <── ┌─────────────────────────┐
+│ & Persona Insights      │     │ (VIP, Dormant, etc.)    │     │ DEAP Genetic Algorithm  │
+└─────────────────────────┘     └─────────────────────────┘     │ (eaMuPlusLambda)        │
+                                                                └─────────────────────────┘
+
+📊 Dataset
+
+Source: UCI Machine Learning Repository - Online Retail II
+
+Scope: 500,000+ non-store online retail transactions.
+
+Preprocessing: Filtered non-positive quantities/prices and missing Customer IDs.
+
+🧬 Methodology & Technical Stack
+
+Language & Frameworks: Python 3.10+, Pandas, NumPy, Scikit-Learn, DEAP, Streamlit, Plotly.
+
+Feature Engineering: Recency (days since last purchase), Frequency (total orders), Monetary (total spend), Average Order Value (AOV).
+
+Dimensionality Reduction: PCA retaining 92% explained variance across 3 principal components.
+
+Optimization Algorithm: DEAP eaMuPlusLambda genetic algorithm with two-point crossover (cxTwoPoint), Gaussian mutation (mutGaussian), and tournament selection (selTournament).   
+
+🎯 Target Customer Segments
+
+Cluster ID,Segment Name,Behavioral Profile,Key Business Action
+
+Cluster 0,VIP High Spenders,"High Monetary spend, frequent orders, very recent activity.","Exclusive loyalty perks, early product access."
+
+Cluster 1,Active Core Buyers,"Steady purchase cadence, moderate order value.",Upsell & cross-sell automated email workflows.
+
+Cluster 2,At-Risk / Dormant,Long time since last purchase (high Recency).,Automated win-back campaigns & discount incentives.
+
+Cluster 3,Wholesale / Champions,High weighted AOV (£479.95) with lower frequency.,Dedicated account manager & bulk volume pricing.
+
+💻 Local Setup & Run
+
+git clone [https://github.com/Pushkr57/evolutionary-customers-segmentation.git](https://github.com/Pushkr57/evolutionary-customers-segmentation.git)
+cd evolutionary-customers-segmentation
+
 python -m venv venv
-venv\Scripts\activate
+# On Windows:
+.\venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
 pip install -r requirements.txt
+
 streamlit run app/app.py
 
+👥 Authors:
+
+Pushkar Bhogaonkar (@Pushkr57)
+Dhanashri Kate (@Dhanashri08)
