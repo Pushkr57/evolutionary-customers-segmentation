@@ -1,11 +1,13 @@
 import os
 import random
+# pyrefly: ignore [missing-import]
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score
 
+# pyrefly: ignore [missing-import]
 from deap import base, creator, tools, algorithms
 
 # Define Project Paths

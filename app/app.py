@@ -1,10 +1,13 @@
 import os
 import io
 import pandas as pd
+# pyrefly: ignore [missing-import]
 import numpy as np
+# pyrefly: ignore [missing-import]
 import streamlit as st
+# pyrefly: ignore [missing-import]
 import plotly.express as px
-import plotly.graph_objects as io_go
+# pyrefly: ignore [missing-import]
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
