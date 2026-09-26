@@ -159,7 +159,7 @@ CLUSTER_PERSONAS = {
 }
 
 # --- Sidebar ---
-st.sidebar.image("https://img.icons8.com/color/96/000000/dna.png", width=64)
+st.sidebar.markdown("## 🧬")
 st.sidebar.title("Evolutionary AI")
 st.sidebar.markdown("**Customer Segmentation Engine**")
 st.sidebar.markdown("---")
